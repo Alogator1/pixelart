@@ -17,9 +17,9 @@ export const Table = () => {
         changeActiveCell(cell);
     }
 
-    const isCellActive = (cellKey: string) => {
+    const isCellActive = (rowIndex: number, columnIndex: number) => {
         return activeCells.find((cell) => {
-            return cell?.id === cellKey;
+            return cell?.column === columnIndex && cell?.row === rowIndex;
         });
     }
 
@@ -34,7 +34,7 @@ export const Table = () => {
                                     <td onMouseOver={() => {
                                         onCellHover({ row: rowIndex, column: columnIndex, id: `${rowIndex}-${columnIndex}` })
                                     }
-                                    } key={`${rowIndex}-${columnIndex}`} className={isCellActive(`${rowIndex}-${columnIndex}`) ? styles.activeCell : ''} />
+                                    } key={`${rowIndex}-${columnIndex}`} className={isCellActive(rowIndex, columnIndex) ? styles.activeCell : ''} />
                                 ))}
                             </tr>
                         ))}
