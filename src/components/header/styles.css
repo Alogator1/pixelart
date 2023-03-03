@@ -1,0 +1,21 @@
+select {
+    width: 150px;
+    margin-right: 20px;
+    height: 25px;
+    border-radius: 0;
+}
+
+button {
+    background-color: #320dc3;
+    color: white;
+    height: 25px;
+    border: 0;
+    border-radius: 5px;
+    width: 50px;
+}
+
+.headerWrapper {
+    margin-bottom: 20px;
+    margin-left: 50px;
+    margin-top: 20px;
+}
