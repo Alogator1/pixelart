@@ -7,6 +7,7 @@ function App() {
   return (
     <TableProvider>
       <Header /> 
+      
       <Table />
     </TableProvider>
   );

@@ -41,6 +41,7 @@ export const Header = () => {
         <div className="headerWrapper">
             <select onChange={onOptionsChange}>
                 <option value={''}>Select mode...</option>
+                
                 {modes.map((mode) => (
                     <option key={mode.name} value={mode.field}>{mode.name}</option>
                 ))}
