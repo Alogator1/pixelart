@@ -14,9 +14,9 @@ export type TableContextType = {
 export const TableContext = React.createContext<TableContextType>({
   activeMode: null,
   modes: [],
-  apiGetActiveMods: () => {},
-  changeActiveCell: () => {},
+  apiGetActiveMods: () => { },
+  changeActiveCell: () => { },
   activeCells: [],
-  setActiveMode: () => {},
-  emptyCells: () => {},
+  setActiveMode: () => { },
+  emptyCells: () => { },
 });

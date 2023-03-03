@@ -4,7 +4,7 @@ import { SelectOption } from "../../context/types";
 import styles from './styles.module.css'
 
 export const Header = () => {
-    const {apiGetActiveMods, modes, setActiveMode, emptyCells} = useContext(TableContext);
+    const { apiGetActiveMods, modes, setActiveMode, emptyCells } = useContext(TableContext);
 
     const [selectedOption, setSelectedOption] = React.useState<SelectOption | null>(null);
 
@@ -13,9 +13,9 @@ export const Header = () => {
     }, [apiGetActiveMods]);
 
     const onOptionsChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-        if(!e.target.value) {
+        if (!e.target.value) {
             setSelectedOption(null);
-            
+
             return;
         };
 
@@ -28,7 +28,7 @@ export const Header = () => {
     const onStartButtonClick = () => {
         emptyCells();
 
-        if(!selectedOption) {
+        if (!selectedOption) {
             setActiveMode(null);
 
             return;
@@ -36,12 +36,12 @@ export const Header = () => {
 
         setActiveMode(selectedOption);
     }
-    
+
     return (
         <div className={styles.headerWrapper}>
             <select onChange={onOptionsChange}>
                 <option value={''}>Select mode...</option>
-                
+
                 {modes.map((mode) => (
                     <option key={mode.name} value={mode.field}>{mode.name}</option>
                 ))}

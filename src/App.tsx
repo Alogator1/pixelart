@@ -6,8 +6,8 @@ import { TableProvider } from './context/provider';
 function App() {
   return (
     <TableProvider>
-      <Header /> 
-      
+      <Header />
+
       <Table />
     </TableProvider>
   );

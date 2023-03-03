@@ -1,21 +1,21 @@
 import React, { PropsWithChildren, useCallback } from 'react';
 import { TableContext } from './context';
-import { TableService } from './services';
+import { TableService } from '../api/services';
 import { SelectOption } from './types';
 
-export function TableProvider (props: PropsWithChildren<{}>) {
-   
+export function TableProvider(props: PropsWithChildren<{}>) {
+
     const [activeMode, setActiveMode] = React.useState<SelectOption | null>(null);
     const [modes, setModes] = React.useState<SelectOption[]>([]);
     const [activeCells, setActiveCells] = React.useState<string[]>([]);
 
     const apiGetActiveMods = useCallback(async () => {
         const response = await TableService.getActiveCells();
-    
+
         if (response.data) {
-          setModes(response.data);
+            setModes(response.data);
         }
-      }, []
+    }, []
     );
 
     const changeActiveCell = (id: string) => {
