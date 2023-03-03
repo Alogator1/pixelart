@@ -1,5 +1,6 @@
 import React, { useContext, useEffect } from 'react';
 import { TableContext } from '../../context/context';
+import { HoveredCell } from '../../context/types';
 import styles from './styles.module.css';
 
 export const Table = () => {
@@ -12,18 +13,14 @@ export const Table = () => {
         setRowsAndColumns(Array.from({ length: activeMode?.field || 0 }));
     }, [activeMode]);
 
-    const onCellHover = (cellKey: string) => {
-        changeActiveCell(cellKey);
+    const onCellHover = (cell: HoveredCell) => {
+        changeActiveCell(cell);
     }
 
     const isCellActive = (cellKey: string) => {
-        return activeCells.includes(cellKey);
-    }
-
-    const getRowAndColumn = (cellKey: string) => {
-        const [row, column] = cellKey.split('-');
-
-        return `Row: ${+row + 1}, Column: ${+column + 1}`;
+        return activeCells.find((cell) => {
+            return cell?.id === cellKey;
+        });
     }
 
     return (
@@ -35,7 +32,7 @@ export const Table = () => {
                             <tr key={rowIndex}>
                                 {rowsAndColumns.map((_, columnIndex) => (
                                     <td onMouseOver={() => {
-                                        onCellHover(`${rowIndex}-${columnIndex}`)
+                                        onCellHover({row: rowIndex, column: columnIndex, id:`${rowIndex}-${columnIndex}`})
                                     }
                                     } key={`${rowIndex}-${columnIndex}`} className={isCellActive(`${rowIndex}-${columnIndex}`) ? styles.activeCell : ''} />
                                 ))}
@@ -50,7 +47,7 @@ export const Table = () => {
                     <span>Hovered squares:</span>
                     <ul>
                         {activeCells.map((cell) => (
-                            <li key={cell}>{getRowAndColumn(cell)}</li>
+                            <li key={cell?.id}>{`Row: ${+cell?.row + 1}, Column: ${+cell?.column + 1}`}</li>
                         ))}
                     </ul>
                 </div>

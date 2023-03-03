@@ -1,13 +1,13 @@
 import React from 'react';
-import { SelectOption } from './types';
+import { HoveredCell, SelectOption } from './types';
 
 export type TableContextType = {
   activeMode: SelectOption | null;
   setActiveMode: (mode: SelectOption | null) => void;
   modes: SelectOption[];
   apiGetActiveMods: () => void;
-  changeActiveCell: (cell: string) => void;
-  activeCells: string[];
+  changeActiveCell: (cell: HoveredCell) => void;
+  activeCells: HoveredCell[];
   emptyCells: () => void;
 };
 

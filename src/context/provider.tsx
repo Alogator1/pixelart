@@ -1,13 +1,13 @@
 import React, { PropsWithChildren, useCallback } from 'react';
 import { TableContext } from './context';
-import { TableService } from '../api/services';
-import { SelectOption } from './types';
+import { TableService } from '../api/table/service';
+import { HoveredCell, SelectOption } from './types';
 
 export function TableProvider(props: PropsWithChildren<{}>) {
 
     const [activeMode, setActiveMode] = React.useState<SelectOption | null>(null);
     const [modes, setModes] = React.useState<SelectOption[]>([]);
-    const [activeCells, setActiveCells] = React.useState<string[]>([]);
+    const [activeCells, setActiveCells] = React.useState<HoveredCell[]>([]);
 
     const apiGetActiveMods = useCallback(async () => {
         const response = await TableService.getActiveCells();
@@ -18,11 +18,11 @@ export function TableProvider(props: PropsWithChildren<{}>) {
     }, []
     );
 
-    const changeActiveCell = (id: string) => {
-        const cellIndex = activeCells.findIndex((activeCell) => activeCell === id);
+    const changeActiveCell = (cell: HoveredCell) => {
+        const cellIndex = activeCells.findIndex((activeCell) => activeCell?.id === cell?.id);
         const cells = [...activeCells];
         if (cellIndex === -1) {
-            setActiveCells([...cells, id]);
+            setActiveCells([...cells, cell]);
 
             return;
         } else {
