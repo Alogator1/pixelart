@@ -1,4 +1,4 @@
-import React, { PropsWithChildren, useCallback } from 'react';
+import React, { PropsWithChildren, useCallback, useMemo } from 'react';
 import { TableContext } from './context';
 import { TableService } from '../api/table/service';
 import { HoveredCell, SelectOption } from './types';
@@ -18,34 +18,35 @@ export function TableProvider(props: PropsWithChildren<{}>) {
     }, []
     );
 
-    const changeActiveCell = (cell: HoveredCell) => {
-        const cellIndex = activeCells.findIndex((activeCell) => activeCell?.id === cell?.id);
-        const cells = [...activeCells];
-        if (cellIndex === -1) {
-            setActiveCells([...cells, cell]);
+    const changeActiveCell = useCallback((cell: HoveredCell) => {
+        setActiveCells((activeCells) => {
+            const cellIndex = activeCells.findIndex((activeCell) => activeCell?.id === cell?.id);
+            const cells = [...activeCells];
+            if (cellIndex < 0) {
+                return [...cells, cell];
+            } else {
+                cells.splice(cellIndex, 1);
+                return cells;
+            }
+        })
+    }, [])
 
-            return;
-        } else {
-            cells.splice(cellIndex, 1);
-
-            setActiveCells(cells);
-        }
-    }
-
-    const emptyCells = () => {
+    const emptyCells = useCallback(() => {
         setActiveCells([]);
-    }
+    }, [])
+
+    const value = useMemo(() => ({
+        activeMode,
+        modes,
+        apiGetActiveMods,
+        changeActiveCell,
+        activeCells,
+        setActiveMode,
+        emptyCells
+    }), [activeMode, modes, apiGetActiveMods, changeActiveCell, activeCells, setActiveMode, emptyCells])
 
     return (
-        <TableContext.Provider value={{
-            activeMode,
-            modes,
-            apiGetActiveMods,
-            changeActiveCell,
-            activeCells,
-            setActiveMode,
-            emptyCells
-        }}>
+        <TableContext.Provider value={value}>
             {props.children}
         </TableContext.Provider>
     );
