@@ -1,6 +1,6 @@
 import React, { useContext, useEffect } from 'react';
 import { TableContext } from '../../context/context';
-import './styles.css';
+import styles from './styles.module.css';
 
 export const Table = () => {
 
@@ -27,7 +27,7 @@ export const Table = () => {
     }
 
     return (
-        <div className='tableWrapper'>
+        <div className={styles.tableWrapper}>
             <div>
                 <table>
                     <tbody>
@@ -37,7 +37,7 @@ export const Table = () => {
                                     <td onMouseOver={() => {
                                         onCellHover(`${rowIndex}-${columnIndex}`)
                                     }
-                                    } key={`${rowIndex}-${columnIndex}`} className={isCellActive(`${rowIndex}-${columnIndex}`) ? 'activeCell' : ''} />
+                                    } key={`${rowIndex}-${columnIndex}`} className={isCellActive(`${rowIndex}-${columnIndex}`) ? styles.activeCell : ''} />
                                 ))}
                             </tr>
                         ))}
@@ -46,7 +46,7 @@ export const Table = () => {
             </div>
 
             {activeCells?.length > 0 &&
-                <div className='hoveredWrapper'>
+                <div className={styles.hoveredWrapper}>
                     <span>Hovered squares:</span>
                     <ul>
                         {activeCells.map((cell) => (

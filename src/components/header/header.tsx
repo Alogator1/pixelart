@@ -1,7 +1,7 @@
 import React, { useContext, useEffect } from "react";
 import { TableContext } from "../../context/context";
 import { SelectOption } from "../../context/types";
-import './styles.css'
+import styles from './styles.module.css'
 
 export const Header = () => {
     const {apiGetActiveMods, modes, setActiveMode, emptyCells} = useContext(TableContext);
@@ -38,7 +38,7 @@ export const Header = () => {
     }
     
     return (
-        <div className="headerWrapper">
+        <div className={styles.headerWrapper}>
             <select onChange={onOptionsChange}>
                 <option value={''}>Select mode...</option>
                 
