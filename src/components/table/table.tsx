@@ -32,7 +32,7 @@ export const Table = () => {
                             <tr key={rowIndex}>
                                 {rowsAndColumns.map((_, columnIndex) => (
                                     <td onMouseOver={() => {
-                                        onCellHover({row: rowIndex, column: columnIndex, id:`${rowIndex}-${columnIndex}`})
+                                        onCellHover({ row: rowIndex, column: columnIndex, id: `${rowIndex}-${columnIndex}` })
                                     }
                                     } key={`${rowIndex}-${columnIndex}`} className={isCellActive(`${rowIndex}-${columnIndex}`) ? styles.activeCell : ''} />
                                 ))}
